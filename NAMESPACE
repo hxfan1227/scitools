@@ -2,4 +2,6 @@
 
 export(count_na)
 export(get_linear_slope)
+export(ls_objects)
+export(lsos)
 importFrom(purrr,possibly)
