@@ -4,12 +4,12 @@
 \alias{get_linear_slope}
 \title{Get the linear slope when passing the significance test}
 \usage{
-get_linear_slope(obj, sig = 0.05, fill = NA)
+get_linear_slope(obj, sig, fill = NA)
 }
 \arguments{
 \item{obj}{A \code{lm} object.}
 
-\item{sig}{Numeric. The significance level for testing.}
+\item{sig}{Numeric. The significance level for testing. If not asigned, pass the test.}
 
 \item{fill}{Numeric. The value used when not passing the significance test}
 }

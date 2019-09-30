@@ -3,7 +3,7 @@ NULL
 #' Get the linear slope when passing the significance test
 #' @export
 #' @param obj A \code{lm} object.
-#' @param sig Numeric. The significance level for testing.
+#' @param sig Numeric. The significance level for testing. If not asigned, pass the test.
 #' @param fill Numeric. The value used when not passing the significance test
 #' @return If the model is significant return the linear slope, else \code{NA}.
 #' @examples
@@ -17,14 +17,18 @@ NULL
 #' get_linear_slope(lm_obj, 0.05)
 #' get_linear_slope(lm_obj2, 0.05)
 #' }
-get_linear_slope <- function(obj, sig = 0.05, fill = NA){
+get_linear_slope <- function(obj, sig, fill = NA){
   if (class(obj) != "lm") stop("Not an object of class 'lm' ")
   f <- summary(obj)$fstatistic
   p <- purrr::possibly(pf, otherwise = 1)(f[1],f[2],f[3],lower.tail=F)
   attributes(p) <- NULL
+  if(missing(sig)){
+    return(coefficients(obj)[2])
+  }
   if (p <= sig){
     return(coefficients(obj)[2])
   } else {
     return(as.numeric(fill))
   }
 }
+
